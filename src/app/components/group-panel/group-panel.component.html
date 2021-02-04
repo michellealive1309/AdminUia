@@ -1,0 +1,50 @@
+<div class="panel_container">
+  <div *ngIf="request === 'password'" class="panel_password">
+    <form [formGroup]="passwordForm" (ngSubmit)="submitUpdatePassword()">
+      <ion-item>
+        <ion-label position="stacked">Enter a new password</ion-label>
+        <ion-input type="text" minlength="5" maxlength="8" formControlName="password"></ion-input>
+      </ion-item>
+      <div class="password_buttons">
+        <ion-button (click)="cancel()" expand="block">
+          Cancel
+        </ion-button>
+        <ion-button type="submit" expand="block" [disabled]="passwordForm.invalid">
+          Confirm
+        </ion-button>
+      </div>
+      <div class="form_error" *ngIf="isSubmit && (passwordForm.invalid || passwordError)">
+        <div class="error_validation" *ngIf="isSubmit && (passwordForm.invalid || !passwordError)">
+          Please enter a new password.
+        </div>
+        <div class="error_updating" *ngIf="isSubmit && (!passwordForm.invalid || passwordError)">
+          Something wrong happened, please try again.
+        </div>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="request === 'group_name'" class="panel_group-name">
+    <form [formGroup]="groupNameForm" (ngSubmit)="submitUpdateGroupName()">
+      <ion-item>
+        <ion-label position="stacked">Enter a new group name</ion-label>
+        <ion-input type="text" formControlName="groupName"></ion-input>
+      </ion-item>
+      <div class="group-name_buttons">
+        <ion-button (click)="cancel()" expand="block">
+          Cancel
+        </ion-button>
+        <ion-button type="submit" expand="block" [disabled]="groupNameForm.invalid">
+          Confirm
+        </ion-button>
+      </div>
+      <div class="form_error" *ngIf="isSubmit && (groupNameForm.invalid || groupNameError)">
+        <div class="error_validation" *ngIf="isSubmit && (groupNameForm.invalid || !groupNameError)">
+          Please enter a new group name.
+        </div>
+        <div class="error_updating" *ngIf="isSubmit && (!groupNameForm.invalid || groupNameError)">
+          Something wrong happened, please try again.
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

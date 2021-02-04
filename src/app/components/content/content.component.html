@@ -1,0 +1,64 @@
+<div class="content_container">
+  <ion-list>
+    <div class="content_card" *ngFor="let content of contents | async">
+      <ion-card *ngIf="content && content.type === 'news'" class="content_card_news">
+        <ion-card-header>
+          <div>
+            <ion-icon name="paper"></ion-icon>
+          </div>
+          <div>
+            <ion-card-title>{{ content.subject }}</ion-card-title>
+            <ion-card-subtitle>{{ (content.group | groupName | async)?.name }}</ion-card-subtitle>
+          </div>
+        </ion-card-header>
+        <div class="content_card_news-footer">
+          <div class="news-footer_upper">{{ content.created | dateFormat }}</div>
+          <div class="news-footer_lower">
+            <ion-button (click)="openNews(content)" fill="clear" expand="block" class="button_read">Read</ion-button>
+          </div>
+        </div>
+        <div class="content_card_delete">
+          <ion-button (click)="editContent(content)" class="edit" fill="clear">Edit</ion-button>
+          <ion-button (click)="deleteContent(content)" class="delete" fill="clear">Delete</ion-button>
+        </div>
+      </ion-card>
+      <ion-card *ngIf="content.type === 'announce'">
+        <ion-card-header>
+          <div>
+            <ion-icon name="megaphone"></ion-icon>
+          </div>
+          <div>
+            <ion-card-title>{{ (content.group | groupName | async)?.name }}</ion-card-title>
+            <ion-card-subtitle>{{ content.created | dateFormat }}</ion-card-subtitle>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          {{ content.content }}
+        </ion-card-content>
+        <ion-item lines="none" *ngIf="content.files.length > 0 && content.files[0] != ''">
+          <ion-list>
+            <div *ngFor="let file of content.files; index as f;">
+              <a href="{{ file }}" target="_blank">{{ (content.filesRef[f] | fileName | async)?.name }}</a>
+            </div>
+          </ion-list>
+        </ion-item>
+        <ion-item *ngIf="content.images.length > 0 && content.images[0] != ''">
+            <ion-slides pager="true" [options]="">
+                <ion-slide *ngFor="let image of content.images; index as i;" style="width: 100%; align-self: center;">
+                    <a href="{{ image }}" target="_blank"><img src="{{ image }}" alt="{{ (content.imagesRef[i] | fileName | async)?.name }}"></a>
+                </ion-slide>
+            </ion-slides>
+        </ion-item>
+        <div class="content_card_announce-footer">
+          <!-- <div class="announce-footer_lower">
+            <ion-button (click)="openAnnounce(content)" fill="clear" expand="block" class="button_read">Read</ion-button>
+          </div> -->
+        </div>
+        <div class="content_card_delete">
+          <!-- <ion-button (click)="editContent(content)" class="edit" fill="clear">Edit</ion-button> -->
+          <ion-button (click)="deleteContent(content)" class="delete" fill="clear">Delete</ion-button>
+        </div>
+      </ion-card>
+    </div>
+  </ion-list>
+</div>

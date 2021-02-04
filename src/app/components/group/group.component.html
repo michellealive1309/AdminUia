@@ -1,0 +1,39 @@
+<div class="group-page"> 
+  <div class="group_nav-top">
+    <ion-button fill="clear" (click)="back()"><ion-icon slot="icon-only" style="color: #fff;" name="arrow-back"></ion-icon></ion-button>
+    <div class="group_detail">
+      <div class="group_detail-name">{{ group.name }}</div>
+      <div class="group_detail-owner">{{ (group.owner | ownerName | async)?.name }}</div>
+      <div class="group_detail-subscriber">{{ group.subscriber.length }} Subscriber(s)</div>
+    </div>
+  </div>
+  <div class="group_container">
+    <div class="group_feed">
+      <div class="group_feed_create-content">
+        <app-content-creator [group]="group"></app-content-creator>
+      </div>
+      <div class="group_feed_content">
+        <app-content [group]="group"></app-content>
+      </div>
+    </div>
+    <div class="group_group-panel">
+      <div class="group-panel_container">
+        <ion-list>
+          <ion-item lines="full" *ngIf="group.password" (click)="requestPassword()" class="panel_ask-password">
+            <ion-label>Request password</ion-label>
+          </ion-item>
+          <ion-item lines="full" *ngIf="group.password" (click)="updatePassword()" class="panel_update-password">
+            <ion-label>Change password</ion-label>
+          </ion-item>
+          <ion-item lines="full" (click)="updateGroupName()" class="panel_update-group-name">
+            <ion-label>Change group name</ion-label>
+          </ion-item>
+          <ion-item (click)="deleteGroup()" lines="full" class="panel_delete-group">
+            <ion-label>Delete group</ion-label>
+            <ion-icon slot="end" name="alert"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+.login-body {
+    position: relative;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    .uia_admin_container {
+        display: table;
+        height: 100%;
+        margin: 0 auto;
+        .login-container {
+            display: table-cell;
+            vertical-align: middle;
+            .uia_admin_login-form {
+                width: 300px;
+                .uia_admin_login-title {
+                    text-align: center;
+                }
+                .uia_admin_login-input {
+                    .uia_admin_input-user {
+                        padding-top: 20px;
+                        padding: 20px 20px 0px;
+                    }
+                    .uia_admin_input-password {
+                        padding: 20px 20px 20px;
+                    }
+                    .uia_admin_input-user ion-input, .uia_admin_input-password ion-input {
+                        width: 100%;
+                        height: 40px;
+                        background-color: #ddd;
+                        border-radius: 5px;
+                        padding: 0px 10px;
+                    }
+                    .uia_admin_input-user input, .uia_admin_input-password ion-input:focus {
+                        outline: none;
+                    }
+                }
+                .uia_admin_login-button {
+                    padding: 0px 50px;
+                    ion-button.login-button {
+                        width: 100%;
+                        height: 50px;
+                        border-radius: 15px;
+                        font-size: 25px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        --background: #13B500;
+                        --background-activated: #108A01;
+                        --background-focused: #108A01;
+                        --background-hover: #108A01;
+                    }
+                }
+                .uia_admin_post-register {
+                    text-align: center;
+                    margin: 10px;
+                    a {
+                        cursor: pointer;
+                    }
+                }
+                .uia_admin_login-error {
+                    position: relative;
+                    .login-error {
+                        text-align: center;
+                        padding: 20px 0px 0px;
+                        position: absolute;
+                        width: 100%;
+                        span {
+                            color: #FF0000;
+                            font-size: 16px;
+                            font-weight: 500;
+                        }
+                    }
+                    .auth-error {
+                        text-align: center;
+                        padding: 20px 0px 0px;
+                        position: absolute;
+                        width: 100%;
+                        span {
+                            color: #FF0000;
+                            font-size: 18px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

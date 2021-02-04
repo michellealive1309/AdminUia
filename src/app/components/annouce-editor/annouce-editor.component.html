@@ -1,0 +1,69 @@
+<div class="announce-editor_container">
+  <div class="announce-editor">
+    <form (ngSubmit)="editAnnounce()" [formGroup]="announceForm">
+      <div class="annouce-editor_content">
+        <ion-item lines="none">
+          <ion-textarea placeholder="Enter what you want to announce here..." formControlName="content" maxlength="500" autoGrow="true"></ion-textarea>
+        </ion-item>
+        <ion-label position="stacked" style="text-align: left;">
+          <h6 style="color: #a2a2a2">Maximum 500 letters</h6>
+        </ion-label>
+        <ion-progress-bar [value]="announceForm.get('content').value?.length / 500" color="success"></ion-progress-bar>
+      </div>
+      <div class="announce-editor_image">
+        <input type="file" id="image-input" accept="image/*" class="announce-editor_image_input" (change)="uploadImage($event.target.files)" [disabled]="isImageUploading">
+        <label for="image-input" class="announce-editor_image_input-fake">Upload an image</label>
+        <div class="announce-editor_image_display">
+          <div *ngFor="let image of announce.images; index as i;" class="image-list">
+            <ion-button (click)="deleteImage(announce.imagesRef[i], image)" color="danger" expand="block" class="announce-editor_image_delete">
+              Delete
+            </ion-button>
+            <img src="{{ image }}" alt="{{ (announce.imagesRef[i] | fileName | async)?.name }}" width="100" height="100">
+          </div>
+        </div>
+        <div *ngIf="isImageUploading && !isImageUploaded">
+          <div *ngIf="imageSnapshot | async as snap" class="announce-editor_image_progress-byte">
+            {{ snap.bytesTransferred }} / {{ snap.totalBytes }}
+          </div>
+          <div *ngIf="imagePercentage | async as pct" class="announce-editor_image_progress-bar">
+            <ion-progress value="{{ pct / 100 }}" color="primary"></ion-progress>
+          </div>
+        </div>
+      </div>
+      <div class="announce-editor_file">
+        <input type="file" id="file-input" class="announce-editor_file_input" (change)="uploadFile($event.target.files)" [disabled]="isFileUploading" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.presentationml.presentation">
+        <label for="file-input" class="announce-editor_file_input-fake">Upload a file</label>
+        <div class="announce-editor_file_display">
+          <div *ngFor="let file of announce.files; index as f;" class="file-list">
+            <ion-item lines="none">
+              <ion-icon slot="start" name="document"></ion-icon>
+              <a href="{{ file }}" target="_blank">{{ (announce.filesRef[f] | fileName | async)?.name }}</a>
+              <ion-button (click)="deleteFile(announce.filesRef[f], file)" slot="end" color="danger" expand="block" class="announce-editor_file_delete">
+                Delete
+              </ion-button>
+            </ion-item>
+          </div>
+        </div>
+        <div *ngIf="isFileUploading && !isFileUploaded">
+          <div *ngIf="fileSnapshot | async as snap" class="announce-editor_file_progress-byte">
+            {{ snap.bytesTransferred }} / {{ snap.totalBytes }}
+          </div>
+          <div *ngIf="filePercentage | async as pct" class="announce-editor_file_progress-bar">
+            <ion-progress value="{{ pct / 100 }}" color="primary"></ion-progress>
+          </div>
+        </div>
+      </div>
+      <div class="announce-editor_submit">
+        <ion-button (click)="back()" expand="block">
+          Cancel
+        </ion-button>
+        <ion-button type="submit" expand="block" [disabled]="announceForm.invalid">
+          Edit
+        </ion-button>
+      </div>
+      <div class="announce-editor_error" *ngIf="announceError">
+        <span>Something wrong is just happened, Please try again.</span>
+      </div>
+    </form>
+  </div>
+</div>

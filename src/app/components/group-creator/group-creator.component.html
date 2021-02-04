@@ -1,0 +1,42 @@
+<div class="group-creator_container">
+  <div class="group-creator_idle" [ngStyle]="idleCreator" (click)="expandElement()">
+    <span>Create new group.</span>
+  </div>
+  <ion-backdrop (ionBackdropTap)="collapseElement()" [ngStyle]="expandCreator"></ion-backdrop>
+  <div class="group-creator_full" [ngStyle]="expandCreator">
+    <form class="group-creator_form" [formGroup]="groupCreatorForm" (ngSubmit)="createGroup()">
+      <div class="creator_group-name">
+        <div class="group-name">Group Name</div>
+        <ion-input type="text" formControlName="groupName" required></ion-input>
+      </div>
+      <div class="creator_group-privacy">
+        <ion-list>
+          <div class="group-privacy">Privacy</div>
+          <ion-radio-group name="privacy" formControlName="privacy" required>
+            <!-- <ion-list-header>Privacy</ion-list-header> -->
+            <ion-item lines="none">
+              <ion-label>Public</ion-label>
+              <ion-radio slot="start" color="success" value="public" (ionSelect)="enablePassword(true)"></ion-radio>
+            </ion-item>
+            <ion-item lines="none">
+              <ion-label>Private</ion-label>
+              <ion-radio slot="start" color="success" value="private" (ionSelect)="enablePassword(false)"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </div>
+      <div class="creator_group-password">
+        <div class="private-password">Password <span style="font-size: 14px; color: #606770;">* 5 character or more</span></div>
+        <ion-input type="text" maxlength="8" minlength="5" placeholder="Only private group can have password." formControlName="password"></ion-input>
+      </div>
+      <div class="creator_submit">
+        <ion-button type="submit" expand="block" [disabled]="!groupCreatorForm.valid">
+          Create group
+        </ion-button>
+      </div>
+      <div class="creator_error" *ngIf="creatorError">
+        <span>Something wrong is just happened, Please try again.</span>
+      </div>
+    </form>
+  </div>
+</div>

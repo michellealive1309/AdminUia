@@ -1,0 +1,37 @@
+<div class="profile-editor_container">
+  <div class="profile_editor_inner">
+    <div class="profile-editor_title">
+      <h2>Edit Profile</h2>
+    </div>
+    <div class="profile-editor_editible">
+      <form [formGroup]="editProfileForm" (ngSubmit)="updateProfile()" class="profile-editor_form">
+        <ion-item>
+          <ion-label position="stacked">First Name</ion-label>
+          <ion-input type="text" placeholder="First Name can not be edit." formControlName="firstName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Last Name</ion-label>
+          <ion-input type="text" placeholder="Last Name can not be edit." formControlName="lastName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Tag</ion-label>
+          <ion-input type="text" maxlength="10" formControlName="tag"></ion-input>
+        </ion-item>
+        <div class="profile-editor_submit">
+          <ion-button slot="end" type="submit">
+            <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+            Confirm
+          </ion-button>
+          <ion-button slot="end" (click)="cancelEdit()">
+            <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+            Cancel
+          </ion-button>
+        </div>
+        <ion-item *ngIf="updateError || valid" lines="none" class="profile-editor_error">
+          <ion-label *ngIf="updateError">Update profile failed.</ion-label>
+          <ion-label *ngIf="valid">Invalid input data.</ion-label>
+        </ion-item>
+      </form>
+    </div>
+  </div>
+</div>

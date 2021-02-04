@@ -1,0 +1,95 @@
+<div class="content-creator_container">
+  <ion-button (click)="selectCreateNews()" [disabled]="selectStyles.newsDisabled" class="create-news_button" [ngStyle]="selectStyles.selectNews">
+    Create News
+  </ion-button>
+  <ion-button (click)="selectCreateAnnounce()" [disabled]="selectStyles.announceDisabled" class="create-announce_button" [ngStyle]="selectStyles.selectAnnounce">
+    Create Announce
+  </ion-button>
+  <div class="create-news_selected" [ngStyle]="selectStyles.selectedNews">
+    <form (ngSubmit)="createNews()" [formGroup]="newsForm">
+      <div class="create-news_subject">
+        <div class="create-news_title">
+          <span class="title">Subject</span>
+          <span class="length"> {{ newsForm.get('subject').value?.length || 0 }}/100 </span>
+        </div>
+        <ion-input type="text" maxlength="100" placeholder="Enter subject here..." formControlName="subject"></ion-input>
+      </div>
+      <div class="create-news_wysiwyg"><!-- wysiwyg = what you see is what you get -->
+        <div class="create-news_content"><h2>Content</h2></div>
+        <quill-editor [styles]="editorStyle" placeholder="Enter text" formControlName="content" required></quill-editor>
+      </div>
+      <div class="create-news_submit">
+        <ion-button type="submit" expand="block" [disabled]="newsForm.invalid">
+          Create news
+        </ion-button>
+      </div>
+      <div class="create-news_error" *ngIf="newsError">
+        <span>Something wrong is just happened, Please try again.</span>
+      </div>
+    </form>
+  </div>
+  <div class="create-announce_selected" [ngStyle]="selectStyles.selectedAnnounce">
+    <form (ngSubmit)="createAnnounce()" [formGroup]="announceForm">
+      <div class="create-announce_content">
+        <ion-item lines="none">
+          <ion-textarea placeholder="Enter what you want to announce here..." formControlName="content" maxlength="500" autoGrow="true"></ion-textarea>
+        </ion-item>
+        <ion-label position="stacked" style="text-align: left;">
+          <h6 style="color: #a2a2a2">Maximum 500 letters</h6>
+        </ion-label>
+        <ion-progress-bar [value]="announceForm.get('content').value?.length / 500" color="success"></ion-progress-bar>
+      </div>
+      <div class="create-announce_image">
+        <input type="file" id="image-input" accept="image/*" class="create-announce_image_input" (change)="uploadImage($event.target.files)" [disabled]="isImageUploading">
+        <label for="image-input" class="create-announce_image_input-fake">Upload an image</label>
+        <div class="create-announce_image_display">
+          <div *ngFor="let imageDetail of imagesDetail" class="image-list">
+            <ion-button (click)="deleteImage(imageDetail.name, imageDetail.pathRef)" color="danger" expand="block" class="create-announce_image_delete">
+              Delete
+            </ion-button>
+            <img src="{{ imageDetail.filePath }}" alt="{{ imageDetail.name }}" width="100" height="100">
+          </div>
+        </div>
+        <div *ngIf="isImageUploading && !isImageUploaded">
+          <div *ngIf="imageSnapshot | async as snap" class="create-announce_image_progress-byte">
+            {{ snap.bytesTransferred }} / {{ snap.totalBytes }}
+          </div>
+          <div *ngIf="imagePercentage | async as pct" class="create-announce_image_progress-bar">
+            <ion-progress value="{{ pct / 100 }}" color="primary"></ion-progress>
+          </div>
+        </div>
+      </div>
+      <div class="create-announce_file">
+        <input type="file" id="file-input" class="create-announce_file_input" (change)="uploadFile($event.target.files)" [disabled]="isFileUploading" accept="application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.openxmlformats-officedocument.presentationml.presentation">
+        <label for="file-input" class="create-announce_file_input-fake">Upload a file</label>
+        <div class="create-announce_file_display">
+          <div *ngFor="let fileDetail of filesDetail" class="file-list">
+            <ion-item lines="none">
+              <ion-icon slot="start" name="document-attach-outline"></ion-icon>
+              <a href="{{ fileDetail.filePath }}" target="_blank">{{ fileDetail.name }}</a>
+              <ion-button (click)="deleteFile(fileDetail.name, fileDetail.pathRef)" slot="end" color="danger" expand="block" class="create-announce_file_delete">
+                Delete
+              </ion-button>
+            </ion-item>
+          </div>
+        </div>
+        <div *ngIf="isFileUploading && !isFileUploaded">
+          <div *ngIf="fileSnapshot | async as snap" class="create-announce_file_progress-byte">
+            {{ snap.bytesTransferred }} / {{ snap.totalBytes }}
+          </div>
+          <div *ngIf="filePercentage | async as pct" class="create-announce_file_progress-bar">
+            <ion-progress value="{{ pct / 100 }}" color="primary"></ion-progress>
+          </div>
+        </div>
+      </div>
+      <div class="create-announce_submit">
+        <ion-button type="submit" expand="block" [disabled]="announceForm.invalid">
+          Create announce
+        </ion-button>
+      </div>
+      <div class="create-announce_error" *ngIf="announceError">
+        <span>Something wrong is just happened, Please try again.</span>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="news-editor_container">
+  <form (ngSubmit)="editNews()" [formGroup]="newsForm">
+    <div class="news-editor_subject">
+      <div class="news-editor_title">
+        <span class="title">Subject</span>
+        <span class="length"> {{ newsForm.get('subject').value?.length || 0 }}/100 </span>
+      </div>
+      <ion-input type="text" maxlength="100" placeholder="Enter subject here..." formControlName="subject" required></ion-input>
+    </div>
+    <div class="news-editor_wysiwyg"><!-- wysiwyg = what you see is what you get -->
+      <div class="news-editor_content"><h2>Content</h2></div>
+      <quill-editor [styles]="editorStyle" placeholder="Enter text" formControlName="content" required></quill-editor>
+    </div>
+    <div class="news-editor_submit">
+      <ion-button (click)="back()" expand="block">
+        Cancel
+      </ion-button>
+      <ion-button type="submit" expand="block" [disabled]="newsForm.invalid">
+        Edit
+      </ion-button>
+    </div>
+    <div class="news-editor_error" *ngIf="newsError">
+      <span>Something wrong is just happened, Please try again.</span>
+    </div>
+  </form>
+  <div class="loading-spinner" *ngIf="isWorking">
+    <ion-spinner name="crescent"></ion-spinner>
+  </div>
+</div>

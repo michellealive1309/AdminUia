@@ -1,0 +1,17 @@
+<div class="news_container">
+  <div class="news_nav-top">
+    <ion-button fill="clear" (click)="back()"><ion-icon slot="icon-only" style="color: #fff;" name="arrow-back"></ion-icon></ion-button>
+  </div>
+  <div class="news_container_inner">
+    <div class="news_subject">
+      <h2 class="title">{{ news.subject }}</h2>
+      <h6 class="subtitle">{{ news.created | dateFormat }}</h6>
+    </div>
+    <div class="news_content">
+      <div class="ql-container ql-snow content_rich-text">
+        <div class="ql-editor" [innerHTML]="news.content">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

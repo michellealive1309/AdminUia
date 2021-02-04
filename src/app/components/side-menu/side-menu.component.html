@@ -1,0 +1,25 @@
+<div class="menu-profile" *ngIf="(userProfile | async) as profile">
+  <ion-item lines="full">
+    <ion-label class="profile-name">
+      <h2>{{ profile.name }}</h2>
+      <span>@{{ profile.tag }}</span>
+    </ion-label>
+  </ion-item>
+  <ion-item lines="none">
+    <ion-label class="profile-department">
+      <span>{{ profile.department }}</span>
+    </ion-label>
+  </ion-item>
+</div>
+<div class="menu-account">
+  <ion-item lines="full" *ngIf="(userProfile | async)?.isAdmin" (click)="goToAdmin()" class="account-admin">
+    <ion-label>Admin panel</ion-label>
+  </ion-item>
+  <ion-item lines="full" (click)="editProfile()" class="account-edit">
+    <ion-label>Edit Profile</ion-label>
+  </ion-item>
+  <ion-item (click)="logout()" lines="full" class="account-logout">
+    <ion-label>Sign Out</ion-label>
+    <ion-icon slot="end" name="alert"></ion-icon>
+  </ion-item>
+</div>

@@ -1,0 +1,174 @@
+.content-creator_container {
+    margin-top: 25px;
+    border: solid 1px #f5f6f7;
+    text-align: center;
+    padding: 10px;
+    div {
+        position: relative;
+    }
+    .create-news_button, .create-announce_button {
+        width: 45%;
+        --color: #fff;
+        --background: #13e013;
+        --background-focused: #14cd14;
+        --background-hover: #14cd14;
+        position: relative;
+        display: inline-block;
+    }
+    .create-news_selected {
+        margin-top: 15px;
+        .create-news_subject {
+            width: 100%;
+            .create-news_title {
+                display: inline-block;
+                width: 100%;
+                text-align: start;
+                .title {
+
+                }
+                .length {
+                    position: absolute;
+                    justify-content: center;
+                    right: 0;
+                }
+            }
+            ion-input {
+                text-align: start;
+            }
+        }
+        .create-news_wysiwyg {
+
+        }
+        .create-news_submit {
+            ion-button {
+                --border-radius: 5px;
+                --background: #13e013;
+                --background-focused: #14cd14;
+                --background-hover: #14cd14;
+            }
+        }
+        .create-news_error {
+            padding: 10px 0 0 10px;
+            text-align: center;
+            span {
+                color: #FF0000;
+            }
+        }
+    }
+    .create-announce_selected {
+        margin-top: 15px;
+        .create-announce_content {
+            
+        }
+        .create-announce_image {
+            margin: 15px 0;
+            .create-announce_image_input {
+                position: absolute;
+                width: 100%;
+                height: 36px;
+                z-index: -1;
+                opacity: 0;
+            }
+            .create-announce_image_input-fake {
+                font-size: 14px;
+                width: 100%;
+                height: 36px;
+                color: white;
+                padding: 10px;
+                background-color: #3880ff;
+                display: inline-block;
+                cursor: pointer;
+            }
+            // .create-announce_image_input::before {
+            //     content: 'Upload an Image';
+            //     display: inline-block;
+            //     background-color: #11aaff;
+            //     outline: none;
+            //     white-space: nowrap;
+            //     cursor: pointer;
+            //     border-radius: 5px;
+            //     -webkit-user-select: none;
+            //     -moz-user-select: none;
+            //     padding: 5px 8px;
+            // }
+            .create-announce_image_display {
+                // width: 100%;
+                // height: 112px;
+                overflow: hidden;
+                position: relative;
+                .image-list {
+                    display: inline-block;
+                    margin-left: 5px;
+                    position: relative;
+                    width: 100px;
+                    height: 100px;
+                    justify-content: left;
+                }
+                .image-list ion-button.create-announce_image_delete {
+                    display: block;
+                    height: 15px;
+                }
+                // .image-list:hover {
+                //     color: #606060;
+                //     opacity: .4;
+                // }
+                // .image-list:hover ion-button.create-announce_image_delete {
+                //     background-color: #ff0000;
+                //     opacity: 1;
+                // }
+            }
+        }
+        .create-announce_file {
+            margin: 15px 0;
+            .create-announce_file_input {
+                position: absolute;
+                width: 100%;
+                height: 36px;
+                z-index: -1;
+                opacity: 0;
+            }
+            .create-announce_file_input-fake {
+                font-size: 14px;
+                width: 100%;
+                height: 36px;
+                color: white;
+                padding: 10px;
+                background-color: #3880ff;
+                display: inline-block;
+                cursor: pointer;
+            }
+        }
+        .create-announce_file_display {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            .file-list {
+                display: block;
+                position: relative;
+            }
+            ion-item {
+                a {
+                    width: 100%;
+                    span {
+                        align-self: flex-end;
+                    }
+                }
+            }
+        }
+        .create-announce_submit {
+            ion-button {
+                --border-radius: 5px;
+                --background: #13e013;
+                --background-focused: #14cd14;
+                --background-hover: #14cd14;
+            }
+        }
+        .create-announce_error {
+            padding: 10px 0 0 10px;
+            text-align: center;
+            span {
+                color: #FF0000;
+            }
+        }
+    }
+}

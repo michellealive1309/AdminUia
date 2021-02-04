@@ -1,0 +1,43 @@
+.panel_container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .panel_password {
+        display: block;
+        width: 100%;
+        .password_buttons {
+            margin: 10px 0 10px 0;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            ion-button {
+                display: inline-block;
+                width: 45%;
+            }
+        }
+    }
+    .panel_group-name {
+        display: block;
+        width: 100%;
+        .group-name_buttons {
+            margin: 10px 0 10px 0;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+            ion-button {
+                display: inline-block;
+                width: 45%;
+            }
+        }
+    }
+    .panel_password .form_error, .panel_group-name .form_error {
+        width: 100%;
+        .error_validation, .error_updating {
+            color: red;
+            text-align: center;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "uiaadmin",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

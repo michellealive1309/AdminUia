@@ -1,0 +1,33 @@
+<div class="post-register_container">
+  <div class="post-register_form">
+    <form [formGroup]="registerForm" (ngSubmit)="registerAnnouncer()">
+      <div class="form_title">
+        <h4>UIA Post Register</h4>
+      </div>
+      <ion-item>
+        <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="email" placeholder="Pre-registered Email" formControlName="email" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Password <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="password" placeholder="Password" formControlName="password" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Re-enter Password <ion-text color="danger">*</ion-text></ion-label>
+        <ion-input type="password" placeholder="Confirm Password" formControlName="repassword" required></ion-input>
+        <div class="password_matching" *ngIf="registerForm.hasError('notSame') && registerForm.get('repassword').dirty">Password do not match.</div>
+      </ion-item>
+      <div class="form_submit">
+        <ion-button (click)="back()" expand="block" color="danger">
+          Cancel
+        </ion-button>
+        <ion-button type="submit" expand="block" [disabled]="registerForm.invalid" color="success">
+          Register
+        </ion-button>
+      </div>
+      <div class="form_error" *ngIf="registerError">
+        {{ registerErrorMessage }}
+      </div>
+    </form>
+  </div>
+</div>

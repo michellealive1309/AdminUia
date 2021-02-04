@@ -1,0 +1,35 @@
+<ion-content class="login-body">
+  <div class="uia_admin_container">
+    <div class="login-container">
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="uia_admin_login-form">
+        <div class="uia_admin_login-title">
+          <img src="../../../assets/loginassets/Untitled-1.png" alt="UIAadmin">
+        </div>
+        <div class="uia_admin_login-input">
+          <div class="uia_admin_input-user">
+            <ion-input type="email" placeholder="Email" (ionFocus)="resetSubmitted()" formControlName="email" required="true"></ion-input>
+          </div>
+          <div class="uia_admin_input-password">
+            <ion-input type="password" placeholder="Password" (ionFocus)="resetSubmitted()" formControlName="password" required="true"></ion-input>
+          </div>
+        </div>
+        <div class="uia_admin_login-button">
+          <ion-button type="submit" class="login-button">Login</ion-button>
+        </div>
+        <div class="uia_admin_post-register">
+          <a (click)="postRegister()">post-register</a>
+        </div>
+        <div class="uia_admin_login-error">
+          <div class="login-error" *ngIf="submitted && (loginForm.get('email').errors || loginForm.get('password').errors)">
+            <span *ngIf="loginForm.get('email').errors.email || loginForm.get('email').errors.required || loginForm.get('password').errors.required">
+              *Please enter valid email and password.
+            </span>
+          </div>
+          <div class="auth-error" *ngIf="loginError">
+            <span>{{ loginErrorMessage }}</span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

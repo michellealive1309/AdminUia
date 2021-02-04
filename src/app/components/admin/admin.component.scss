@@ -1,0 +1,119 @@
+.admin_container {
+    display: flex;
+    justify-content: center;
+    min-width: 725px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-top: 50px;
+    .admin_panel {
+        width: 100%;
+        max-width: 200px;
+        margin-right: 25px;
+        ion-item {
+            width: 100%;
+            cursor: pointer;
+            transition: .7s;
+            margin-bottom: 5px;
+        }
+        ion-item.official-group_selected { color: green; }
+        ion-item.add-announcer_selected { color: green; }
+        ion-item.add-students_selected { color: green; }
+        ion-item:hover {
+            color: green;
+        }
+    }
+    .admin_main-area {
+        width: 100%;
+        max-width: 500px;
+        .official-group_container, .add-announcer_container, .add-students_container {
+            display: none;
+        }
+        .official-group_selected {
+            display: block !important;
+        }
+        .add-announcer_selected {
+            display: block !important;
+        }
+        .add-students_selected {
+            display: block !important;
+        }
+        .add-announcer_container.add-announcer_selected .add-announcer_create-account {
+
+            .add-announce_submit {
+                margin-top: 10px;
+            }
+            .add-announcer_error {
+                width: 100%;
+                text-align: center;
+                color: red;
+                margin: 10px 0 10px;
+            }
+        }
+        .add-announcer_container.add-announcer_selected .announcer-list_container {
+
+            .announcer-list_title {
+                text-align: center;
+            }
+            .announcer-list_announcer {
+                ion-card {
+                    .announcer-list_announcer-button {
+                        width: 100%;
+                        ion-button { 
+                            width:45%;
+                            display: inline-block; 
+                        }
+                    }
+                }
+            }
+        }
+        .add-students_container.add-students_selected {
+
+            .add-students_input-file {
+                .title { text-align: center; }
+                .add-students_input {
+                    position: absolute;
+                    width: 100%;
+                    height: 36px;
+                    z-index: -1;
+                    opacity: 0;
+                }
+                .add-students_input-fake {
+                    font-size: 14px;
+                    width: 100%;
+                    height: 36px;
+                    color: white;
+                    padding: 10px;
+                    background-color: #3880ff;
+                    display: inline-block;
+                    cursor: pointer;
+                }
+            }
+            .add-students_none-list{
+                margin: 10px 0 10px;
+                h4 {text-align: center;}
+            }
+            .add-students_list {
+                ion-item {
+                    .student {
+                     
+                        div {
+                            padding: 10px;
+                            display: block;
+                            position: relative;
+                            h5 {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+                .student-spinner {
+                    position: relative;
+                    text-align: center;
+                    margin: 10px 0 10px;
+                    ion-spinner {
+                    }
+                }
+            }
+        }
+    }
+}

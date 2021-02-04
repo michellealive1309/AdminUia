@@ -1,0 +1,131 @@
+<div class="admin_container">
+  <div class="admin_panel">
+    <ion-item style="margin-bottom: 10px;" lines="full" (click)="back()">
+      <ion-icon name="arrow-back" slot="start"></ion-icon>
+      <ion-label>Back to home</ion-label>
+    </ion-item>
+    <!-- future content -->
+    <!-- <ion-item (click)="selectOfficialGroup()" [ngClass]="{'official-group_selected': selectedOfficialGroup}">
+      <ion-label>Official Group</ion-label>
+    </ion-item> -->
+    <ion-item (click)="selectAddAnnouncer()" [ngClass]="{'add-announcer_selected': selectedAddAnnouncer}">
+      <ion-label>Add new announcer</ion-label>
+    </ion-item>
+    <ion-item (click)="selectAddStudents()" [ngClass]="{'add-students_selected': selectedAddStudents}">
+      <ion-label>Add students account</ion-label>
+    </ion-item>
+  </div>
+  <div class="admin_main-area">
+    <!-- future content -->
+    <!-- <div class="official-group_container" [ngClass]="{'official-group_selected': selectedOfficialGroup}">
+      Official Group
+    </div> -->
+    <div class="add-announcer_container" [ngClass]="{'add-announcer_selected': selectedAddAnnouncer}">
+      <div class="add-announcer_create-account">
+        <form [formGroup]="addAnnouncerForm" (ngSubmit)="createAnnouncer()">
+          <ion-item>
+            <ion-label position="stacked">Email <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input type="email" formControlName="email" placeholder="Enter an email..." required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Password <ion-text color="danger">*Auto generate</ion-text></ion-label>
+            <ion-input type="password" formControlName="password" placeholder="Auto Generate" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Full name <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input type="text" formControlName="name" placeholder="Enter first name and last name..." required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Tag name <ion-text color="danger">* 5-10 character</ion-text></ion-label>
+            <ion-input type="text" formControlName="tag" minlength="5" maxlength="10" placeholder="Enter a tag..." required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Department <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input type="text" formControlName="department" placeholder="Enter department..." required></ion-input>
+          </ion-item>
+          <div class="add-announce_submit">
+            <ion-button type="submit" expand="block" color="success" [disabled]="addAnnouncerForm.invalid">
+              Create account
+            </ion-button>
+          </div>
+          <div class="add-announcer_error" *ngIf="addAnnouncerError">
+            {{ addAnnouncerErrorMessage }}
+          </div>
+        </form>
+      </div>
+      <!-- future section -->
+      <!-- <div class="announcer-list_container">
+        <div class="announcer-list_title">
+          <h2>Recently added announcer</h2>
+        </div>
+        <div class="announcer-list_announcer">
+          <ion-list>
+            <ion-card *ngFor="let announcer of announcers | async">
+              <ion-card-header>
+                <ion-card-subtitle>{{ announcer.email }}</ion-card-subtitle>
+                <ion-card-title>{{ announcer.name }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                This announcer is created on {{ announcer.created | dateFormat }}
+              </ion-card-content>
+              <div class="announcer-list_announcer-button">
+                <ion-button (click)="deleteAnnouncer()" expand="block" fill="clear" color="danger">
+                  Delete announcer
+                </ion-button>
+                <ion-button (click)="resetPassword()" expand="block" fill="clear" color="success">
+                  Reset password
+                </ion-button>
+              </div>
+            </ion-card>
+          </ion-list>
+        </div>
+      </div> -->
+    </div>
+    <div class="add-students_container" [ngClass]="{'add-students_selected': selectedAddStudents}">
+      <div class="add-students_input-file">
+        <div class="title"><h2>Add students account with .csv file</h2></div>
+        <ion-item lines="none">
+          <input id="input-csv-file" type="file" class="add-students_input" (change)="getCSVData($event.target.files)" accept=".csv">
+          <label for="input-csv-file" class="add-students_input-fake">Select a CSV file</label>
+        </ion-item>
+      </div>
+      <div class="add-students_none-list" *ngIf="records.length == 0">
+        <h4>All user added to database or no any csv file readed.</h4>
+      </div>
+      <div class="add-students_list" *ngIf="records.length > 0">
+        <ion-button (click)="addAllStudent()" expand="block" color="success" shape="round">
+          Add all students
+        </ion-button>
+        <div class="student-spinner" *ngIf="isStudentAdding">
+          <ion-spinner name="crescent"></ion-spinner>
+        </div>
+        <ion-list>
+          <ion-item *ngFor="let record of records">
+            <div class="student">
+              <div class="student-email">
+                <h5>Email:</h5>
+                <span>{{ record.email }}</span>
+              </div>
+              <div class="student-identity">
+                <h5>Identity number:</h5>
+                <span>{{ record.identityNumber }}</span>
+              </div>
+              <div class="student-name">
+                <h5>Name:</h5>
+                <span>{{ record.name }}</span>
+              </div>
+              <div class="student-faculty">
+                <h5>Faculty:</h5>
+                <span>{{ record.faculty }}</span>
+              </div>
+              <div class="student-majority">
+                <h5>Majority:</h5>
+                <span>{{ record.majority }}</span>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+  </div>
+</div>
